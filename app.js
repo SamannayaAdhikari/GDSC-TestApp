@@ -6,7 +6,7 @@ flash = require("connect-flash");
 
 // Importing database model
 
-const subscribers = require("./models/subscribers")
+const Subscribers = require("./models/subscribers")
 
 
 mongoose.connect("mongodb://localhost/tech_club", {
@@ -20,11 +20,35 @@ app.set("view engine" , "ejs");
 app.use(flash());
 app.use(express.static(__dirname+"/public"));
 
+app.use(require("express-session")({
+	secret  			: "youtube vs tiktok",
+	resave				: false,
+	saveUninitialized 	: false
+}))
+
+app.use(function(req,res,next){
+	res.locals.error = req.flash("error");
+	res.locals.message = req.flash("success");
+	next();
+})
 
 app.get("/",(req,res)=>{
 	res.render("index")
 })
 
+app.post("/",(req,res)=>{
+	Subscribers.create(req.body.info,function(err,subscriber){
+		if (err){
+			req.flash("error", "Something Went Wromg ")
+			res.redirect("/")
+		}
+		else{
+			console.log(req.body.info.email)
+			req.flash("success", "We appreciate your consideration and welcome you to the Boss Club :P ")
+			res.redirect("/")
+		}
+	})
+})
 
 
 
