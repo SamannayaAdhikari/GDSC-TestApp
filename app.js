@@ -35,7 +35,7 @@ app.use(require("express-session")({
 	saveUninitialized 	: false
 }))
 
-app.use(function(req,res,next){
+app.use((req,res,next)=>{
 	res.locals.error = req.flash("error");
 	res.locals.message = req.flash("success");
 	next();
@@ -46,7 +46,7 @@ app.get("/",(req,res)=>{
 })
 
 app.post("/",(req,res)=>{
-	Subscribers.create(req.body.info,function(err,subscriber){
+	Subscribers.create(req.body.info,(err,subscriber)=>{
 		if (err){
 			req.flash("error", "Something Went Wromg ")
 			res.redirect("/")
@@ -62,6 +62,6 @@ app.post("/",(req,res)=>{
 
 
 
-app.listen("5000", ()=>{
-	console.log("server started")
-})
+app.listen(process.env.PORT || 5000, ()=>{
+    console.log("Server started");
+  }); 
