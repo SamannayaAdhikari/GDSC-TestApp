@@ -8,8 +8,17 @@ flash = require("connect-flash");
 
 const Subscribers = require("./models/subscribers")
 
+// local mongo
 
-mongoose.connect("mongodb://localhost/tech_club", {
+// mongoose.connect("mongodb://localhost/tech_club", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useCreateIndex: true
+// })
+
+// cluster mongo 
+
+mongoose.connect("mongodb+srv://deepjyotideka:hello@123@yelpcamp.zfidh.mongodb.net/tech_club?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
