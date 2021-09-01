@@ -46,17 +46,25 @@ app.get("/",(req,res)=>{
 })
 
 app.post("/",(req,res)=>{
-	Subscribers.create(req.body.info,(err,subscriber)=>{
+	console.log(req.body.info)
+	if (req.body.info.answer == 165 ){
+		
+	
+	Subscribers.create({email : req.body.info.email},(err,subscriber)=>{
 		if (err){
-			req.flash("error", "Something Went Wromg ")
+			req.flash("error", "Something Went Wrong ")
 			res.redirect("/")
 		}
 		else{
-			console.log(req.body.info.email)
-			req.flash("success", "We appreciate your consideration and welcome you to the Boss Club :P ")
-			res.redirect("/")
+			req.flash("success", "We appreciate your consideration and welcome you to https://dsc-uni-gauhati.web.app/ :P ")
+			res.redirect("https://dsc-uni-gauhati.web.app/")
 		}
 	})
+		}
+	else{ 
+	req.flash("error", `Sorry ${req.body.info.email}! Thats not the right answer`)
+	res.redirect("/")
+		}
 })
 
 
