@@ -41,8 +41,12 @@ app.use((req,res,next)=>{
 	next();
 })
 
-app.get("/",(req,res)=>{
+app.get("/aptitude",(req,res)=>{
 	res.render("index")
+})
+
+app.get("/algo",(req,res)=>{
+	res.render("algo")
 })
 
 app.post("/",(req,res)=>{
