@@ -5,7 +5,7 @@
 body {
     color: #414f57;
     min-height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../img/bg.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../img/newbg.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
