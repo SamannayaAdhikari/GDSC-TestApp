@@ -7,6 +7,8 @@ flash = require("connect-flash");
 // Importing database model
 
 const Subscribers = require("./models/subscribers")
+const Algosolvers = require("./models/algosolvers");
+
 
 // local mongo
 
@@ -51,7 +53,7 @@ app.get("/algo",(req,res)=>{
 
 app.post("/",(req,res)=>{
 	console.log(req.body.info)
-	if (req.body.info.answer == 165 ){
+	if (req.body.info.answer == 431 ){
 		
 	
 	Subscribers.create({email : req.body.info.email},(err,subscriber)=>{
@@ -67,7 +69,29 @@ app.post("/",(req,res)=>{
 		}
 	else{ 
 	req.flash("error", `Sorry ${req.body.info.email}! Thats not the right answer`)
-	res.redirect("/")
+	res.redirect("/aptitude")
+		}
+})
+
+app.post("/algo",(req,res)=>{
+	console.log(req.body.info)
+	if (req.body.info.output == 36 ){
+		
+	
+	Algosolvers.create({email : req.body.info.email},(err,subscriber)=>{
+		if (err){
+			req.flash("error", "Something Went Wrong ")
+			res.redirect("/algo")
+		}
+		else{
+			req.flash("success", "We appreciate your consideration and welcome you to https://dsc-uni-gauhati.web.app/ :P ")
+			res.redirect("/algo")
+		}
+	})
+		}
+	else{ 
+	req.flash("error", `Sorry ${req.body.info.email}! Thats not the right answer`)
+	res.redirect("/algo")
 		}
 })
 
